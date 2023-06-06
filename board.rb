@@ -1,4 +1,5 @@
 require_relative('card')
+require("byebug")
 
 class Board
   attr_reader :grid
@@ -22,17 +23,8 @@ class Board
   def populate
     # Create a list of card pairs in a random order.
     cards = []
-    revealed = ['C', 'E']
     ("A".."Z").to_a[0,(@size ** 2)/2].each do |card_value|
-      if revealed.include?(card_value)
-        2.times do
-          card = Card.new(card_value)
-          card.reveal
-          cards << card
-        end
-      else
         2.times { cards << Card.new(card_value) }
-      end
     end
     cards.shuffle!
     # Populate grid with card pairs
@@ -69,15 +61,14 @@ class Board
   end
 
   def reveal(guess_position)
-    # reveal a card at guessed_pos (unless its already face up)
-    # return value of card
     x, y = guess_position
     card = @grid[x][y]
     if card.faceup
       puts "Card is already revealed at #{x}, #{y}"
     else
       card.reveal
-      card.value
+      self.render
+      card
     end
   end
 end

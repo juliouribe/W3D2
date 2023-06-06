@@ -19,7 +19,7 @@ class Card
     "#{@value} is #{showing}"
   end
 
-  def ==(element)
-    @value == element
+  def ==(card)
+    @value == card.value
   end
 end
