@@ -45,6 +45,7 @@ class Game
       card = self.make_guess(guess_pos)
       if @previous_guess and card
         compared_cards(card)
+        system("clear")
       elsif card
         @previous_guess = card
       end
