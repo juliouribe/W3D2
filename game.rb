@@ -10,9 +10,13 @@ class Game
   def prompt
     puts "Enter a position, ex 0 3"
     input = gets.chomp.split(" ")
+    if input[0].downcase == 'exit'
+      puts "Exiting program..."
+      exit
+    end
     guess = [input[0].to_i, input[1].to_i]
-    if guess.length != 2 and (
-      guess[0].is_a?(Integer) and guess[1].is_a?(Integer))
+    if guess.length != 2 or (
+      !guess[0].is_a?(Integer) or !guess[1].is_a?(Integer))
       raise RuntimeError.new("Guess was not valid. Please try again")
     end
     guess
